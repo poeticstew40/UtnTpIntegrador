@@ -14,3 +14,5 @@ public class Main {
     }
 
 }
+
+//Todo min 51
