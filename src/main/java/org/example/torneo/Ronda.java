@@ -29,4 +29,14 @@ public class Ronda {
     public void setPartidos(List<Partido> partidos) {
         this.partidos = partidos;
     }
+
+    public void agregarPartido(Partido partido){
+        for (Partido p : this.partidos){
+            if (p.igual(partido)){
+                throw  new RuntimeException("El partido ya existe");
+            }
+        }
+        this.partidos.add(partido);
+    }
+    //todo MIN 41
 }

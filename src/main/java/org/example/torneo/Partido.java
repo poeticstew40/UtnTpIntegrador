@@ -1,5 +1,7 @@
 package org.example.torneo;
 
+import java.util.Objects;
+
 public class Partido {
 
     private Equipo equipo1;
@@ -44,5 +46,10 @@ public class Partido {
 
     public void setGoles2(int goles2) {
         this.goles2 = goles2;
+    }
+
+    public boolean igual(Partido partido) {
+        return (this.equipo1.equals(partido.equipo1) && this.equipo2.equals(partido.equipo2))
+                || (this.equipo1.equals(partido.equipo2) && this.equipo2.equals(partido.equipo1));
     }
 }
