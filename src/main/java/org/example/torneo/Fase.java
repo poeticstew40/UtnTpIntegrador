@@ -8,7 +8,7 @@ public class Fase {
     private List<Ronda> rondas;
     private int numFase;
 
-    public  Fase() {
+    public  Fase(int numFase) {
         this.rondas = new ArrayList<>();
         this.numFase = numFase;
     }
