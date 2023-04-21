@@ -17,18 +17,20 @@ public class LectorDB {
     public LectorDB(LectorCSV lectorCSV) {
         this.lectorCSV = lectorCSV;
         this.personas = new ArrayList<>();
+        this.pronosticos = new ArrayList<>();
     }
 
     public void cargarPronosticos(){
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pronosticos", "root", "44186324");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from pronosticos");
 
             while (rs.next()) {
+
                 Fase fase = lectorCSV.buscarFase(rs.getInt("fase"));
                 if(fase == null){
                     throw new RuntimeException("La fase no existe ");
@@ -52,17 +54,17 @@ public class LectorDB {
                 boolean empate = rs.getBoolean("empate");
                 boolean gana2 = rs.getBoolean("gana2");
 
-                EnumResultado enumResultado = null;
+                Resultado resultado = null;
 
                 if (gana1){
-                    enumResultado = EnumResultado.GANA1;
+                    resultado = Resultado.GANA1;
                 } else if (gana2) {
-                    enumResultado = EnumResultado.GANA2;
+                    resultado = Resultado.GANA2;
                 } else if (empate){
-                    enumResultado = EnumResultado.EMPATE;
+                    resultado = Resultado.EMPATE;
                 }
 
-                Pronostico pronostico = new Pronostico(fase, ronda, persona, partido, enumResultado);
+                Pronostico pronostico = new Pronostico(fase, ronda, persona, partido, resultado);
 
                 this.agregarPronostico(pronostico);
             }
@@ -83,6 +85,7 @@ public class LectorDB {
                 throw new RuntimeException("Ya hay un pronostico de x persona para el partido x");
             }
         }
+        this.pronosticos.add(pronostico);
     }
 
     private Persona obtenerPersona(String nombrePersona) {
@@ -96,6 +99,7 @@ public class LectorDB {
         }
         if (persona == null){
             persona = new Persona(nombrePersona);
+            this.personas.add(persona);
         }
         return persona;
 

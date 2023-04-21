@@ -1,5 +1,5 @@
 package org.example.torneo;
 
-public enum EnumResultado {
+public enum Resultado {
     GANA1,EMPATE,GANA2
 }

@@ -58,4 +58,14 @@ public class Partido {
         return (this.equipo1.getNombre().equals(equipo1) && this.equipo2.getNombre().equals(equipo2))
                 || (this.equipo1.getNombre().equals(equipo2)) && this.equipo2.getNombre().equals(equipo1);
     }
+
+    public Resultado getResultado(){
+        if(goles1 == goles2){
+            return  Resultado.EMPATE;
+        }else if (goles1 > goles2){
+            return  Resultado.GANA1;
+        }else{
+            return Resultado.GANA2;
+        }
+    }
 }

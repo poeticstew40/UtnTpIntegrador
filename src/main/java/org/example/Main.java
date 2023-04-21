@@ -2,6 +2,10 @@ package org.example;
 
 import org.example.lectores.LectorCSV;
 import org.example.lectores.LectorDB;
+import org.example.torneo.Persona;
+import org.example.torneo.Pronostico;
+
+import java.sql.SQLOutput;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,8 +25,26 @@ public class Main {
         lectorCSV.cargarResultados();
         lectorDB.cargarPronosticos();
 
+        calcularPuntos(lectorDB, puntajePartido, puntajeExtraRonda, puntajeExtraFase);
+
         
     }
+    //Todo 1:34:00
+    private static void calcularPuntos(LectorDB lectorDB, int puntajePartido, int puntajeExtraRonda, int puntajeExtraFase) {
+        for (Pronostico p : lectorDB.getPronosticos()){
+            if (p.resultadoAcertado()){
+                p.getPersona().sumarPuntos(puntajePartido);
+                p.getPersona().agregarAcierto();
+            }
+        }
+
+        for (Persona p : lectorDB.getPersonas()){
+            System.out.println("Nombre:" + p.getNombre());
+            System.out.println("Aciertos " + p.getCantidadAciertos());
+            System.out.println("Puntaje " + p.getPuntos());
+        }
+    }
+
 
 }
 

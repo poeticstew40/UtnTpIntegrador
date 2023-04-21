@@ -6,14 +6,14 @@ public class Pronostico {
     private Ronda ronda;
     private Persona persona;
     private Partido partido;
-    private  EnumResultado enumResultado;
+    private Resultado resultado;
 
-    public Pronostico(Fase fase, Ronda ronda, Persona persona, Partido partido, EnumResultado enumResultado) {
+    public Pronostico(Fase fase, Ronda ronda, Persona persona, Partido partido, Resultado resultado) {
         this.fase = fase;
         this.ronda = ronda;
         this.persona = persona;
         this.partido = partido;
-        this.enumResultado = enumResultado;
+        this.resultado = resultado;
     }
 
     public Fase getFase() {
@@ -48,11 +48,15 @@ public class Pronostico {
         this.partido = partido;
     }
 
-    public EnumResultado getEnumResultado() {
-        return enumResultado;
+    public Resultado getEnumResultado() {
+        return resultado;
     }
 
-    public void setEnumResultado(EnumResultado enumResultado) {
-        this.enumResultado = enumResultado;
+    public void setEnumResultado(Resultado resultado) {
+        this.resultado = resultado;
+    }
+
+    public boolean resultadoAcertado(){
+        return this.partido.getResultado().equals(this.resultado);
     }
 }

@@ -5,6 +5,7 @@ import org.example.torneo.Fase;
 import org.example.torneo.Partido;
 import org.example.torneo.Ronda;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,6 +14,11 @@ public class LectorCSV {
 
     private List<Equipo> equipos;
     private List<Fase> fases;
+
+    public LectorCSV() {
+        this.equipos = new ArrayList<>();
+        this.fases = new ArrayList<>();
+    }
 
     public void cargarResultados() {
 
@@ -42,7 +48,7 @@ public class LectorCSV {
 
         f1.agregarRonda(r1);
 
-
+        this.fases.add(f1);
     }
 
     public void agregarEquipo(Equipo equipo) {
