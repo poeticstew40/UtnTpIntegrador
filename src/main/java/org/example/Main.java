@@ -17,7 +17,7 @@ public class Main {
 //        int puntajeExtraFase = Integer.parseInt(args[3]);
 
 
-        int puntajePartido = 2;
+        int puntajePartido = 1;
         int puntajeExtraRonda = 10;
         int puntajeExtraFase = 20;
 
