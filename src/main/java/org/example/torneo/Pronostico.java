@@ -2,13 +2,13 @@ package org.example.torneo;
 
 public class Pronostico {
 
-    private int fase;
-    private int ronda;
+    private Fase fase;
+    private Ronda ronda;
     private Persona persona;
     private Partido partido;
     private  EnumResultado enumResultado;
 
-    public Pronostico(int fase, int ronda, Persona persona, Partido partido, EnumResultado enumResultado) {
+    public Pronostico(Fase fase, Ronda ronda, Persona persona, Partido partido, EnumResultado enumResultado) {
         this.fase = fase;
         this.ronda = ronda;
         this.persona = persona;
@@ -16,19 +16,19 @@ public class Pronostico {
         this.enumResultado = enumResultado;
     }
 
-    public int getFase() {
+    public Fase getFase() {
         return fase;
     }
 
-    public void setFase(int fase) {
+    public void setFase(Fase fase) {
         this.fase = fase;
     }
 
-    public int getRonda() {
+    public Ronda getRonda() {
         return ronda;
     }
 
-    public void setRonda(int ronda) {
+    public void setRonda(Ronda ronda) {
         this.ronda = ronda;
     }
 

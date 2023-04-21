@@ -38,5 +38,18 @@ public class Ronda {
         }
         this.partidos.add(partido);
     }
+
+    public Partido obtenerPartido(String equipo1, String equipo2) {
+
+        Partido partido = null;
+
+        for(Partido p : this.partidos){
+            if (p.tieneEquipos(equipo1, equipo2)){
+                partido = p;
+            }
+        }
+
+        return partido;
+    }
     //todo MIN 41
 }

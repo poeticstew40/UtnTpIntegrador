@@ -52,4 +52,10 @@ public class Partido {
         return (this.equipo1.equals(partido.equipo1) && this.equipo2.equals(partido.equipo2))
                 || (this.equipo1.equals(partido.equipo2) && this.equipo2.equals(partido.equipo1));
     }
+
+    public boolean tieneEquipos(String equipo1, String equipo2) {
+
+        return (this.equipo1.getNombre().equals(equipo1) && this.equipo2.getNombre().equals(equipo2))
+                || (this.equipo1.getNombre().equals(equipo2)) && this.equipo2.getNombre().equals(equipo1);
+    }
 }

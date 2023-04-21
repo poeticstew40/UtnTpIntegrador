@@ -38,4 +38,16 @@ public class Fase {
     public void setNumFase(int numFase) {
         this.numFase = numFase;
     }
+
+    public Ronda buscarRonda(int numRonda){
+        Ronda ronda = null;
+
+        for (Ronda r : this.rondas){
+            if (r.getNumRonda() == numRonda){
+                ronda = r;
+            }
+        }
+        return ronda;
+
+    }
 }

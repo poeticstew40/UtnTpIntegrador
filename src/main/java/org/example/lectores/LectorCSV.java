@@ -11,10 +11,8 @@ import java.util.List;
 //Todo  HAY QUE HACER QUE EL LECTOR CSV LEA LOS CSVS, TERMINAR DE CREAR LA CLASE
 public class LectorCSV {
 
-    List<Equipo> equipos;
-    List<Partido> partidos;
-    List<Ronda> rondas;
-    List<Fase> fases;
+    private List<Equipo> equipos;
+    private List<Fase> fases;
 
     public void cargarResultados() {
 
@@ -63,5 +61,17 @@ public class LectorCSV {
             }
         }
         this.fases.add(fase);
+    }
+
+    public Fase buscarFase(int numFase){
+        Fase fase = null;
+
+        for (Fase f : this.fases){
+            if (f.getNumFase() == numFase){
+                fase = f;
+            }
+        }
+        return fase;
+
     }
 }
