@@ -98,6 +98,24 @@ public class LectorDB {
             persona = new Persona(nombrePersona);
         }
         return persona;
+
+    }
+
+
+    public List<Persona> getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(List<Persona> personas) {
+        this.personas = personas;
+    }
+
+    public List<Pronostico> getPronosticos() {
+        return pronosticos;
+    }
+
+    public void setPronosticos(List<Pronostico> pronosticos) {
+        this.pronosticos = pronosticos;
     }
 }
 
