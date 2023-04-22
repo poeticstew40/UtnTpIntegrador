@@ -20,40 +20,16 @@ public class Pronostico {
         return fase;
     }
 
-    public void setFase(Fase fase) {
-        this.fase = fase;
-    }
-
     public Ronda getRonda() {
         return ronda;
-    }
-
-    public void setRonda(Ronda ronda) {
-        this.ronda = ronda;
     }
 
     public Persona getPersona() {
         return persona;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-
     public Partido getPartido() {
         return partido;
-    }
-
-    public void setPartido(Partido partido) {
-        this.partido = partido;
-    }
-
-    public Resultado getEnumResultado() {
-        return resultado;
-    }
-
-    public void setEnumResultado(Resultado resultado) {
-        this.resultado = resultado;
     }
 
     public boolean resultadoAcertado(){

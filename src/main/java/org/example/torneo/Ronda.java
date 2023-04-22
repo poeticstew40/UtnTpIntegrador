@@ -51,5 +51,10 @@ public class Ronda {
 
         return partido;
     }
+
+    public int cantidadPartidos() {
+        return partidos.size();
+    }
+
     //todo MIN 41
 }
