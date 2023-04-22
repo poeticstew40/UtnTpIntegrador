@@ -59,4 +59,6 @@ public class Pronostico {
     public boolean resultadoAcertado(){
         return this.partido.getResultado().equals(this.resultado);
     }
+
+
 }
