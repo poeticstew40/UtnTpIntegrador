@@ -76,8 +76,6 @@ public class LectorDB {
 
     }
 
-
-
     private void agregarPronostico(Pronostico pronostico) {
         for (Pronostico p : this.pronosticos){
             if (p.getFase().equals(pronostico.getFase())
@@ -107,17 +105,22 @@ public class LectorDB {
 
     }
 
+
     public List<Persona> getPersonas() {
         return personas;
     }
 
+    public void setPersonas(List<Persona> personas) {
+        this.personas = personas;
+    }
 
     public List<Pronostico> getPronosticos() {
         return pronosticos;
     }
 
-
-
+    public void setPronosticos(List<Pronostico> pronosticos) {
+        this.pronosticos = pronosticos;
+    }
 }
 
 
