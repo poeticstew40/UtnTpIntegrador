@@ -4,7 +4,6 @@ import org.example.lectores.LectorCSV;
 import org.example.lectores.LectorDB;
 import org.example.torneo.Persona;
 import org.example.torneo.Pronostico;
-import org.example.torneo.Ronda;
 
 import java.sql.SQLOutput;
 
@@ -39,11 +38,10 @@ public class Main {
             }
         }
 
-        for (Persona p : lectorDB.getPersonas()) {
+        for (Persona p : lectorDB.getPersonas()){
             System.out.println("Nombre:" + p.getNombre());
-            System.out.println("Aciertos: " + p.getCantidadAciertos());
-            System.out.println("Puntaje: " + p.getPuntos());
-            System.out.println();
+            System.out.println("Aciertos " + p.getCantidadAciertos());
+            System.out.println("Puntaje " + p.getPuntos());
         }
     }
 
