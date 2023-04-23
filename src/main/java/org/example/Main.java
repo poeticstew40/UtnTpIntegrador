@@ -4,25 +4,41 @@ import org.example.lectores.LectorCSV;
 import org.example.lectores.LectorDB;
 import org.example.torneo.Persona;
 import org.example.torneo.Pronostico;
-import org.example.torneo.Ronda;
 
-import java.sql.SQLOutput;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
+
+        String configFilePath = args[0];
+        int puntajePartido = 0;
+        int puntajeExtraRonda = 0;
+        int puntajeExtraFase = 0;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(configFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split("=");
+                if (parts.length == 2) {
+                    String key = parts[0].trim();
+                    String value = parts[1].trim();
+                    switch (key) {
+                        case "puntajePartido" -> puntajePartido = Integer.parseInt(value);
+                        case "puntajeExtraRonda" -> puntajeExtraRonda = Integer.parseInt(value);
+                        case "puntajeExtraFase" -> puntajeExtraFase = Integer.parseInt(value);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading config file: " + e.getMessage());
+        }
+
+
+
         LectorCSV lectorCSV = new LectorCSV();
         LectorDB lectorDB = new LectorDB(lectorCSV);
-
-//        int puntajePartido = Integer.parseInt(args[1]);
-//        int puntajeExtraRonda = Integer.parseInt(args[2]);
-//        int puntajeExtraFase = Integer.parseInt(args[3]);
-
-
-        int puntajePartido = 1;
-        int puntajeExtraRonda = 10;
-        int puntajeExtraFase = 20;
-
 
         lectorCSV.cargarResultados();
         lectorDB.cargarPronosticos();

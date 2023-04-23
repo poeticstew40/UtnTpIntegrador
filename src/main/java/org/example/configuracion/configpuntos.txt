@@ -1,0 +1,3 @@
+puntajePartido=1
+puntajeExtraRonda=10
+puntajeExtraFase=100
