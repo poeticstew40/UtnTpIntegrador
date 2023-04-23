@@ -7,7 +7,6 @@ public class Persona {
     private int cantidadAciertos;
     private int rondasAcertadas;
     private int aciertosEnLaRondaActual;
-    private int fasesAcertadas;
 
     public Persona(String nombre) {
         this.nombre = nombre;
@@ -15,11 +14,6 @@ public class Persona {
         this.cantidadAciertos = 0;
         this.rondasAcertadas = 0;
         this.aciertosEnLaRondaActual = 0;
-        this.fasesAcertadas = 0;
-    }
-
-    public int getFasesAcertadas() {
-        return fasesAcertadas;
     }
 
     public String getNombre() {
@@ -51,12 +45,6 @@ public class Persona {
         if (this.aciertosEnLaRondaActual == 4) {
             this.rondasAcertadas++;
             this.aciertosEnLaRondaActual = 0;
-        }
-    }
-
-    public void agregarFaseAcertada() {
-        if (this.cantidadAciertos == 8){
-            this.fasesAcertadas++;
         }
     }
 }

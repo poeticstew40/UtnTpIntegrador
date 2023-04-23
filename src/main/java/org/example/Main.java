@@ -37,13 +37,10 @@ public class Main {
             if (p.resultadoAcertado()) {
                 p.getPersona().sumarPuntos(puntajePartido);
                 p.getPersona().agregarAcierto();
+
                 if (p.getPersona().getCantidadAciertos() % 4 == 0) { // Verifica si la persona ha acertado 4 partidos
                     p.getPersona().agregarRondaAcertada();
                     p.getPersona().sumarPuntos(puntajeExtraRonda);
-                    if(p.getPersona().getCantidadAciertos() == 8){
-                        p.getPersona().agregarFaseAcertada();
-                        p.getPersona().sumarPuntos(puntajeExtraFase);
-                    }
                 }
             }
         }
@@ -53,7 +50,6 @@ public class Main {
             System.out.println("Aciertos: " + p.getCantidadAciertos());
             System.out.println("Puntaje: " + p.getPuntos());
             System.out.println("Rondas Acertadas " + p.getRondasAcertadas());
-            System.out.println("Fases Acertadas " + p.getFasesAcertadas());
             System.out.println();
         }
     }
