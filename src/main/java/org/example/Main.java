@@ -7,6 +7,7 @@ import org.example.torneo.Pronostico;
 import org.example.torneo.Ronda;
 
 import java.sql.SQLOutput;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,14 +29,22 @@ public class Main {
 
         calcularPuntos(lectorDB, puntajePartido, puntajeExtraRonda, puntajeExtraFase);
 
-        
+
     }
     //Todo 1:34:00
     private static void calcularPuntos(LectorDB lectorDB, int puntajePartido, int puntajeExtraRonda, int puntajeExtraFase) {
-        for (Pronostico p : lectorDB.getPronosticos()){
-            if (p.resultadoAcertado()){
+        for (Pronostico p : lectorDB.getPronosticos()) {
+            if (p.resultadoAcertado()) {
                 p.getPersona().sumarPuntos(puntajePartido);
                 p.getPersona().agregarAcierto();
+                if (p.getPersona().getCantidadAciertos() % 4 == 0) { // Verifica si la persona ha acertado 4 partidos
+                    p.getPersona().agregarRondaAcertada();
+                    p.getPersona().sumarPuntos(puntajeExtraRonda);
+                    if(p.getPersona().getCantidadAciertos() == 8){
+                        p.getPersona().agregarFaseAcertada();
+                        p.getPersona().sumarPuntos(puntajeExtraFase);
+                    }
+                }
             }
         }
 
@@ -43,6 +52,8 @@ public class Main {
             System.out.println("Nombre:" + p.getNombre());
             System.out.println("Aciertos: " + p.getCantidadAciertos());
             System.out.println("Puntaje: " + p.getPuntos());
+            System.out.println("Rondas Acertadas " + p.getRondasAcertadas());
+            System.out.println("Fases Acertadas " + p.getFasesAcertadas());
             System.out.println();
         }
     }
