@@ -2,6 +2,9 @@ package org.example.lectores;
 
 import org.example.torneo.*;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +14,23 @@ public class LectorDB {
     private LectorCSV lectorCSV;
     private List<Persona> personas;
     private List<Pronostico> pronosticos;
+    private String dbUrl;
+    private String dbUser;
+    private String dbPassword;
 
-
-
-    public LectorDB(LectorCSV lectorCSV) {
+    public LectorDB(LectorCSV lectorCSV, String dbConfigFilePath) {
         this.lectorCSV = lectorCSV;
         this.personas = new ArrayList<>();
         this.pronosticos = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(dbConfigFilePath));
+            this.dbUrl = reader.readLine();
+            this.dbUser = reader.readLine();
+            this.dbPassword = reader.readLine();
+            reader.close();
+        } catch (IOException e) {
+            throw new RuntimeException("Error al leer el archivo de configuración de la base de datos", e);
+        }
     }
 
     public void cargarPronosticos(){
@@ -25,7 +38,7 @@ public class LectorDB {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pronosticos", "root", "44186324");
+            Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from pronosticos");
 

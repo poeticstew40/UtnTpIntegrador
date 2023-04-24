@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) {
 
         String configFilePath = args[0];
+        String dbConnection = args[1];
         int puntajePartido = 0;
         int puntajeExtraRonda = 0;
         int puntajeExtraFase = 0;
@@ -35,18 +36,17 @@ public class Main {
             System.err.println("Error reading config file: " + e.getMessage());
         }
 
-
-
         LectorCSV lectorCSV = new LectorCSV();
-        LectorDB lectorDB = new LectorDB(lectorCSV);
+        LectorDB lectorDB = new LectorDB(lectorCSV, dbConnection);
 
         lectorCSV.cargarResultados();
         lectorDB.cargarPronosticos();
 
         calcularPuntos(lectorDB, puntajePartido, puntajeExtraRonda, puntajeExtraFase);
 
-
     }
+
+
     //Todo 1:34:00
     private static void calcularPuntos(LectorDB lectorDB, int puntajePartido, int puntajeExtraRonda, int puntajeExtraFase) {
         for (Pronostico p : lectorDB.getPronosticos()) {
