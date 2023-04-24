@@ -46,21 +46,26 @@ public class Main {
 
     }
 
-
-    //Todo 1:34:00
     private static void calcularPuntos(LectorDB lectorDB, int puntajePartido, int puntajeExtraRonda, int puntajeExtraFase) {
         for (Pronostico p : lectorDB.getPronosticos()) {
             if (p.resultadoAcertado()) {
-                p.getPersona().sumarPuntos(puntajePartido);
-                p.getPersona().agregarAcierto();
-                if (p.getPersona().getCantidadAciertos() % 4 == 0) { // Verifica si la persona ha acertado 4 partidos
-                    p.getPersona().agregarRondaAcertada();
-                    p.getPersona().sumarPuntos(puntajeExtraRonda);
-                    if(p.getPersona().getCantidadAciertos() == 8){
-                        p.getPersona().agregarFaseAcertada();
-                        p.getPersona().sumarPuntos(puntajeExtraFase);
-                    }
+                Persona persona = p.getPersona();
+                persona.sumarPuntos(puntajePartido);
+                persona.agregarAcierto();
+                int aciertosRonda = persona.getAciertosEnLaRondaActual();
+                if (aciertosRonda == 4) {
+                    persona.agregarRondaAcertada();
+                    persona.sumarPuntos(puntajeExtraRonda);
+                    persona.setAciertosEnLaRondaActual(0);
                 }
+                int aciertosFase = persona.getCantidadAciertos();
+                if (aciertosFase == 8) {
+                    persona.agregarFaseAcertada();
+                    persona.sumarPuntos(puntajeExtraFase);
+                }
+            } else {
+                Persona persona = p.getPersona();
+                persona.setAciertosEnLaRondaActual(0);
             }
         }
 
@@ -75,10 +80,8 @@ public class Main {
     }
 
 
+
+
 }
 
 /// TODO: 21/4/2023 HAY QUE HACER EL ARCHIVO DE CONFIG, CON LA CONEXION A LA DB
-
-//Todo min 51
-
-/// TODO: 21/4/2023  VER MIN 1:25:00

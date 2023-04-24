@@ -3,19 +3,52 @@ package org.example.torneo;
 public class Persona {
 
     private String nombre;
-    private Integer puntos;
+    private int puntos;
     private int cantidadAciertos;
     private int rondasAcertadas;
-    private int aciertosEnLaRondaActual;
     private int fasesAcertadas;
+    private int aciertosUltimaRonda;
+    private int aciertosUltimaFase;
+    private int aciertosEnLaRondaActual;
 
     public Persona(String nombre) {
         this.nombre = nombre;
         this.puntos = 0;
         this.cantidadAciertos = 0;
         this.rondasAcertadas = 0;
-        this.aciertosEnLaRondaActual = 0;
         this.fasesAcertadas = 0;
+        this.aciertosUltimaRonda = 0;
+        this.aciertosUltimaFase = 0;
+        this.aciertosEnLaRondaActual = 0;
+    }
+
+
+
+    // getters y setters para las nuevas variables
+
+
+    public int getAciertosEnLaRondaActual() {
+        return aciertosEnLaRondaActual;
+    }
+
+    public void setAciertosEnLaRondaActual(int aciertosEnLaRondaActual) {
+        this.aciertosEnLaRondaActual = aciertosEnLaRondaActual;
+    }
+
+    public int getAciertosUltimaRonda() {
+        return aciertosUltimaRonda;
+    }
+
+    public void setAciertosUltimaRonda(int aciertosUltimaRonda) {
+        this.aciertosUltimaRonda = aciertosUltimaRonda;
+    }
+
+    public int getAciertosUltimaFase() {
+        return aciertosUltimaFase;
+    }
+
+    public void setAciertosUltimaFase(int aciertosUltimaFase) {
+        this.aciertosUltimaFase = aciertosUltimaFase;
     }
 
     public int getFasesAcertadas() {
@@ -50,8 +83,8 @@ public class Persona {
     public void agregarRondaAcertada() {
         if (this.aciertosEnLaRondaActual == 4) {
             this.rondasAcertadas++;
-            this.aciertosEnLaRondaActual = 0;
         }
+        this.aciertosEnLaRondaActual = 0; // Reiniciar contador de aciertos en la ronda actual
     }
 
     public void agregarFaseAcertada() {
@@ -60,5 +93,3 @@ public class Persona {
         }
     }
 }
-
-
