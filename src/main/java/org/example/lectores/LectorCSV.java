@@ -5,6 +5,9 @@ import org.example.torneo.Fase;
 import org.example.torneo.Partido;
 import org.example.torneo.Ronda;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,51 +23,48 @@ public class LectorCSV {
         this.fases = new ArrayList<>();
     }
 
-    public void cargarResultados() {
+    public void cargarResultados(String rutaArchivoCSV) {
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivoCSV))) {
+            String linea;
+            Fase faseActual = null;
+            Ronda rondaActual = null;
+            while ((linea = br.readLine()) != null) {
+                String[] campos = linea.split(",");
+                String nombreEquipo1 = campos[0];
+                String nombreEquipo2 = campos[1];
+                int golesEquipo1 = Integer.parseInt(campos[2]);
+                int golesEquipo2 = Integer.parseInt(campos[3]);
 
-        Equipo argentina = new Equipo("Argentina");
-        Equipo arabia = new Equipo("Arabia Saudita");
-        Equipo polonia = new Equipo("Polonia");
-        Equipo mexico = new Equipo("Mexico");
-        Equipo alemania  = new Equipo("Alemania");
-        Equipo japon = new Equipo("Japon");
-        Equipo españa  = new Equipo("España");
-        Equipo costaRica = new Equipo("Costa Rica");
+                Equipo equipo1 = buscarEquipo(nombreEquipo1);
+                Equipo equipo2 = buscarEquipo(nombreEquipo2);
+                if (equipo1 == null) {
+                    equipo1 = new Equipo(nombreEquipo1);
+                    agregarEquipo(equipo1);
+                }
+                if (equipo2 == null) {
+                    equipo2 = new Equipo(nombreEquipo2);
+                    agregarEquipo(equipo2);
+                }
 
-        this.agregarEquipo(argentina);
-        this.agregarEquipo(arabia);
-        this.agregarEquipo(polonia);
-        this.agregarEquipo(mexico);
+                Partido partido = new Partido(equipo1, equipo2, golesEquipo1, golesEquipo2);
 
-        Partido p1 = new Partido(argentina, arabia, 1, 2);
-        Partido p2 = new Partido(polonia, mexico, 0, 0);
-        Partido p3 = new Partido(argentina, mexico, 2, 0);
-        Partido p4 = new Partido(arabia, polonia, 0, 2);
+                if (faseActual == null || rondaActual == null) {
+                    // Aún no se ha creado ninguna fase o ronda, así que creamos una nueva
+                    faseActual = new Fase(1);
+                    rondaActual = new Ronda(1);
+                    faseActual.agregarRonda(rondaActual);
+                    this.fases.add(faseActual);
+                } else if (rondaActual.getPartidos().size() >= 4) {
+                    // Ya se han creado cuatro partidos en la ronda actual, así que creamos una nueva
+                    rondaActual = new Ronda(rondaActual.getNumRonda() + 1);
+                    faseActual.agregarRonda(rondaActual);
+                }
 
-        Partido p5 = new Partido(alemania , japon, 1, 2);
-        Partido p6 = new Partido(españa, costaRica, 7, 0);
-        Partido p7 = new Partido(japon, costaRica, 0, 1);
-        Partido p8 = new Partido(españa, alemania, 1, 1);
-
-        Ronda r1 = new Ronda(1);
-        Ronda r2 = new Ronda(2);
-
-        r1.agregarPartido(p1);
-        r1.agregarPartido(p2);
-        r1.agregarPartido(p3);
-        r1.agregarPartido(p4);
-
-        r2.agregarPartido(p5);
-        r2.agregarPartido(p6);
-        r2.agregarPartido(p7);
-        r2.agregarPartido(p8);
-
-        Fase f1 = new Fase(1);
-
-        f1.agregarRonda(r1);
-        f1.agregarRonda(r2);
-
-        this.fases.add(f1);
+                rondaActual.agregarPartido(partido);
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo CSV: " + e.getMessage());
+        }
     }
 
     public void agregarEquipo(Equipo equipo) {
@@ -95,5 +95,14 @@ public class LectorCSV {
         }
         return fase;
 
+    }
+
+    private Equipo buscarEquipo(String nombreEquipo) {
+        for (Equipo equipo : this.equipos) {
+            if (equipo.getNombre().equals(nombreEquipo)) {
+                return equipo;
+            }
+        }
+        return null;
     }
 }

@@ -39,7 +39,7 @@ public class Main {
         LectorCSV lectorCSV = new LectorCSV();
         LectorDB lectorDB = new LectorDB(lectorCSV, dbConnection);
 
-        lectorCSV.cargarResultados();
+        lectorCSV.cargarResultados("C:/Users/nicol/OneDrive/Escritorio/UTN Curso Java Inicial/UtnTpIntegrador/src/main/java/org/example/csv/partidos.csv");
         lectorDB.cargarPronosticos();
 
         calcularPuntos(lectorDB, puntajePartido, puntajeExtraRonda, puntajeExtraFase);
