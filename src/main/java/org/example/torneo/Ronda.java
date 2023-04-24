@@ -52,6 +52,4 @@ public class Ronda {
         return partido;
     }
 
-    //todo MIN 41
-
 }

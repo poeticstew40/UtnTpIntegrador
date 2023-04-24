@@ -135,4 +135,3 @@ public class LectorDB {
         this.pronosticos = pronosticos;
     }
 }
-/// TODO: 21/4/2023  1:02:48

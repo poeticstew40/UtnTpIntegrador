@@ -78,10 +78,4 @@ public class Main {
             System.out.println();
         }
     }
-
-
-
-
 }
-
-/// TODO: 21/4/2023 HAY QUE HACER EL ARCHIVO DE CONFIG, CON LA CONEXION A LA DB

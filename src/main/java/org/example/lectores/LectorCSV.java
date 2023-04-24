@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-//Todo  HAY QUE HACER QUE EL LECTOR CSV LEA LOS CSVS, TERMINAR DE CREAR LA CLASE
 public class LectorCSV {
 
     private List<Equipo> equipos;

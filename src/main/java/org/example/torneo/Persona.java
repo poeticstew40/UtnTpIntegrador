@@ -22,11 +22,6 @@ public class Persona {
         this.aciertosEnLaRondaActual = 0;
     }
 
-
-
-    // getters y setters para las nuevas variables
-
-
     public int getAciertosEnLaRondaActual() {
         return aciertosEnLaRondaActual;
     }
