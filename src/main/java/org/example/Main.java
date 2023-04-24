@@ -14,6 +14,7 @@ public class Main {
 
         String configFilePath = args[0];
         String dbConnection = args[1];
+        String csvFilePath = args[2];
         int puntajePartido = 0;
         int puntajeExtraRonda = 0;
         int puntajeExtraFase = 0;
@@ -39,12 +40,13 @@ public class Main {
         LectorCSV lectorCSV = new LectorCSV();
         LectorDB lectorDB = new LectorDB(lectorCSV, dbConnection);
 
-        lectorCSV.cargarResultados("C:/Users/nicol/OneDrive/Escritorio/UTN Curso Java Inicial/UtnTpIntegrador/src/main/java/org/example/csv/partidos.csv");
+        lectorCSV.cargarResultados(csvFilePath);
         lectorDB.cargarPronosticos();
 
         calcularPuntos(lectorDB, puntajePartido, puntajeExtraRonda, puntajeExtraFase);
 
     }
+
 
     private static void calcularPuntos(LectorDB lectorDB, int puntajePartido, int puntajeExtraRonda, int puntajeExtraFase) {
         for (Pronostico p : lectorDB.getPronosticos()) {
