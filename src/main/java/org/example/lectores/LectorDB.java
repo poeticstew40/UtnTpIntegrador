@@ -60,7 +60,7 @@ public class LectorDB {
                 Partido partido = ronda.obtenerPartido(rs.getString("equipo1"),rs.getString("equipo2"));
                 if(partido == null){
                     throw new RuntimeException("El partido no xiste");
-                    /// TODO: 21/4/2023 Crear la excepcion
+                    /// TODO Crear la excepcion
                 }
 
                 boolean gana1 = rs.getBoolean("gana1");

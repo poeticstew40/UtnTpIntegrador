@@ -34,7 +34,7 @@ public class Main {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error reading config file: " + e.getMessage());
+            System.err.println("Error leyendo configfile: " + e.getMessage());
         }
 
         LectorCSV lectorCSV = new LectorCSV();
